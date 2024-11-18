@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import {
   Card,
@@ -41,7 +40,7 @@ export function ChatAI() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ prompt: message }),
+        body: JSON.stringify({ prompt: message, thread_id: currentChatId }),
       });
 
       if (!response.ok) {
