@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useEffect, useRef } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { Bot, User2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
@@ -8,6 +9,12 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 export function ChatMessage({ message }: { message: Message }) {
+  const messageEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [message]);
+
   return (
     <div
       className={`flex items-start mb-4 ${
@@ -54,6 +61,8 @@ export function ChatMessage({ message }: { message: Message }) {
           <User2 size={20} color="white" />
         </Avatar>
       )}
+
+      <div ref={messageEndRef} />
     </div>
   );
 }
